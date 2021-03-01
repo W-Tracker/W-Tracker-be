@@ -1,4 +1,5 @@
 const router = require("express").Router()
+const checkID = require("../middleware/check-id")
 const SM = require("./strains-model")
 
 router.get("/", async (req, res) => {
@@ -32,7 +33,7 @@ router.post("/", async (req, res) => {
     }
 })
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", checkID, async (req, res) => {
     try {
         const data = await SM.updateStrain(req.params.id, req.body)
         res.status(201).json(data)
@@ -41,10 +42,10 @@ router.put("/:id", async (req, res) => {
     }
 })
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", checkID, async (req, res) => {
     try {
-        const data = await SM.deleteStrain(req.params.id)
-        res.status(200).json(data, " was killed")
+        await SM.deleteStrain(req.params.id)
+        res.status(200).json("Its gone now")
     } catch (error) {
         res.status(500).json(error.message)
     }

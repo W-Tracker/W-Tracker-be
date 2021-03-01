@@ -1,4 +1,3 @@
-const { xssFilter } = require("helmet")
 const db = require("../../data/dbConfig")
 
 async function getByUserId(id){
