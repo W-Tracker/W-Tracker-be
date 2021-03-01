@@ -26,7 +26,6 @@ router.post("/login", (req, res) => {
     AuthModel.findBy({ username: username})
         .then(([user]) => {
           if ( user && bcryptjs.compareSync(password, user.password)){
-            console.log(user)
             const token = makeToken(user)
             jwt.verify(token, jwtSecret, (err, decoded) => {
               if(err){
