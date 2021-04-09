@@ -12,6 +12,16 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", checkID, async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = await SM.getStrainById(id);
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+});
+
 router.post("/", async (req, res) => {
   try {
     const body = {
