@@ -6,6 +6,7 @@ const helmet = require("helmet")
 const restricted = require("./middleware/restricted-middleware")
 const authRouter = require("./auth/auth-router")
 const strainsRouter = require("./strains/strains-router")
+const AWSRouter = require("./aws/aws-Router")
 
 const server = express()
 
@@ -15,6 +16,7 @@ server.use(express.json())
 
 server.use("/api/auth", authRouter)
 server.use("/api/strains", restricted, strainsRouter)
+server.use("/api/aws", restricted, AWSRouter)
 
 server.get("/", (_, res) => {
     res.status(200).json({message: "🏃 Server is up an running 🏃"})

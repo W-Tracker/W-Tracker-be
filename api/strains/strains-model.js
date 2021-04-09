@@ -11,7 +11,6 @@ async function addStrain(data){
 
 async function updateStrain(id, data){
     const x = await db("strains").update(data).where({id})
-    console.log(x)
     return db("strains").where({id}).first()
 }
 
